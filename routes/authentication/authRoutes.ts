@@ -4,7 +4,7 @@ import { IUser } from "./auth-types";
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const pool = require('../db');
+const pool = require('../../src/database');
 
 
 const router = express.Router();
