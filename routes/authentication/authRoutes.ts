@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { IUser } from "./auth-types";
 
 const express = require('express');
@@ -9,10 +8,10 @@ const pool = require('../../src/database');
 
 const router = express.Router();
 
-router.post('/login', async (req: Request<{}, {}, IUser>, res: Response) => {
+router.post('/login', async (req:any, res:any) => {
     try {
 
-        const { username, password } = req.body;
+        const { username, password }:IUser = req.body;
 
         if (!username || !password) {
             return res.status(400).send('Username and password are required');
@@ -33,11 +32,9 @@ router.post('/login', async (req: Request<{}, {}, IUser>, res: Response) => {
             return res.status(500).send('Server configuration error');
         }
         
-        // Generate JWT token
         const token: string = jwt.sign({ userId: user.rows[0].id}, process.env.JWT_SECRET , {expiresIn: '1h'});
         res.json({ token } );
-    } catch (error) {
-
+    } catch (error: any) {
         console.error('Login error:', error);
         res.status(500).send('Internal server error');
     }
