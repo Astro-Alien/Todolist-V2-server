@@ -1,4 +1,4 @@
-import { ITaskBody,ITask } from "./requester-types";
+import { ITaskBody} from "./requester-types";
 const express = require('express');
 const authentication = require('../../middleware/auth');
 const pool = require('../../src/database');
@@ -33,7 +33,7 @@ router.post('/createTask', authentication, async (req:any, res:any) => {
 });
 
 //Get all tasks
-router.get('/getTasks', authentication, async (req: Request, res: Response) => {
+router.get('/getTasks', authentication, async (req: any, res: any) => {
     try {
         const userId: number = req.user.userId;
         
